@@ -24,7 +24,7 @@ public class Ticket {
     public String getShowId() {
         return show.getId();
     }
-    public List<Seat> getShowList() {
+    public List<Seat> getSeatList() {
         return seatList;
     }
 
