@@ -1,27 +1,26 @@
 package MovieBooking.dtos;
 
 import java.util.Date;
-import MovieBooking.entities.*;
 
 public class ShowResponse {
-    private final String id;
+    private final String showId;
     private final Date start;
     private final Date end;
-    private final Screen screen;
-    private final Cinema cinema;
-    private final Movie movie;
+    private final String screenName;
+    private final String cinemaName;
+    private final String movieName;
     
-    public ShowResponse(String id, Date start, Date end, Screen screen, Cinema cinema, Movie movie) {
-        this.id = id;
+    public ShowResponse(String showId, Date start, Date end, String screenName, String cinemaName, String movieName) {
+        this.showId = showId;
         this.start = start;
         this.end = end;
-        this.screen = screen;
-        this.cinema = cinema;
-        this.movie = movie;
+        this.screenName = screenName;
+        this.cinemaName = cinemaName;
+        this.movieName = movieName;
     }
 
-    public String getId() {
-        return id;
+    public String getShowId() {
+        return showId;
     }
 
     public Date getStart() {
@@ -33,22 +32,22 @@ public class ShowResponse {
     }
 
     public String getScreenName() {
-        return screen.getName();
+        return screenName;
     }
 
     public String getCinemaName() {
-        return cinema.getName();
+        return cinemaName;
     }
 
     public String getMovieName() {
-        return movie.getTitle();
+        return movieName;
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        result = prime * result + ((showId == null) ? 0 : showId.hashCode());
         return result;
     }
 
@@ -61,10 +60,10 @@ public class ShowResponse {
         if (getClass() != obj.getClass())
             return false;
         ShowResponse other = (ShowResponse) obj;
-        if (id == null) {
-            if (other.id != null)
+        if (showId == null) {
+            if (other.showId != null)
                 return false;
-        } else if (!id.equals(other.id))
+        } else if (!showId.equals(other.showId))
             return false;
         return true;
     }
