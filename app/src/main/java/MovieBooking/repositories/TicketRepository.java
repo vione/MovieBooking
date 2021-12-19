@@ -37,7 +37,9 @@ public class TicketRepository implements ITicketRepository {
     @Override
     public Ticket saveTicket(Customer customer, Show show, List<Seat> seatList) {
         String id = (++counter).toString();
-        return ticketMap.put(id, new Ticket(id, customer, show, seatList));
+        Ticket ticket = new Ticket(id, customer, show, seatList);
+        ticketMap.put(id,ticket);
+        return ticket;
     }
     
 }

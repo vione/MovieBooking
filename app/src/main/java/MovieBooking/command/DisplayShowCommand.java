@@ -26,6 +26,7 @@ public class DisplayShowCommand implements ICommand{
                 new SimpleDateFormat("dd/MM/yyyy HH:mm").format(showResponse.getEnd()));
             System.out.println("Cinema Name - "+showResponse.getCinemaName());
             System.out.println("Screen Name - "+showResponse.getScreenName());
+            System.out.println();
         }
         
     }

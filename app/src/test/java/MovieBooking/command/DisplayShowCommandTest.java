@@ -64,12 +64,14 @@ public class DisplayShowCommandTest {
                 "End Time - 20/07/2021 13:00\n" +
                 "Cinema Name - CinemaA\n" +
                 "Screen Name - ScreenA\n" +
+                "\n" + 
                 "Show Id - 2\n" +
                 "Movie Title - MovieA\n" +
                 "Start Time - 20/07/2021 10:30\n" +
                 "End Time - 20/07/2021 13:00\n" +
                 "Cinema Name - CinemaA\n" +
                 "Screen Name - ScreenB\n" +
+                "\n"+
                 "Show Id - 3\n" +
                 "Movie Title - MovieA\n" +
                 "Start Time - 20/07/2021 10:30\n" +

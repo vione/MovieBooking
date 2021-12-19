@@ -3,12 +3,58 @@
  */
 package MovieBooking;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import MovieBooking.command.CommandInvoker;
+import MovieBooking.config.ApplicationConfiguration;
+import MovieBooking.exceptions.NoSuchCommandFoundException;
+import MovieBooking.exceptions.NoSuchDataFoundException;
+import MovieBooking.repositories.data.DataLoader;
+
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
+    public static void run(List<String> commandLineArgs) {
+        
+        ApplicationConfiguration appConfing = new ApplicationConfiguration();
+        CommandInvoker commandInvoker = appConfing.getCommandInvoker();
+        DataLoader dataLoader = appConfing.getDataLoader();
+        String inputFile = commandLineArgs.remove(0);
+        for(String arg: commandLineArgs){
+            String[] tokens = arg.split("=");
+            try{
+                dataLoader.executeData(tokens[0], tokens[1]);
+            } catch(NoSuchDataFoundException e){
+                e.printStackTrace();
+            }
+        }
+        BufferedReader reader;
+        try {
+            reader = new BufferedReader(new FileReader(inputFile.split("=")[1]));
+            String line = reader.readLine();
+            while(line != null){
+                List<String> tokens = Arrays.asList(line.split(" "));
+                commandInvoker.executeCommand(tokens.get(0), tokens);
+                line = reader.readLine();
+            }
+        } catch(IOException | NoSuchCommandFoundException e){
+            e.printStackTrace();
+        }
+
     }
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        List<String> commandLineArgs = new LinkedList<>(Arrays.asList(args));
+        String expectedInput = "INPUT-FILE$CINEMA-DATA$SCREEN-DATA$SEAT-DATA$CUSTOMER-DATA" + 
+            "$MOVIE-DATA$SHOW-DATA";
+        String actualSequence = commandLineArgs.stream()
+            .map(a->a.split("=")[0])
+            .collect(Collectors.joining("$"));
+        if(expectedInput.equals(actualSequence))
+        run(commandLineArgs);
     }
 }

@@ -4,11 +4,515 @@
 package MovieBooking;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+
+@DisplayName("Integration Testing")
+@ExtendWith(MockitoExtension.class)
 class AppTest {
-    @Test void appHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull(classUnderTest.getGreeting(), "app should have a greeting");
+    
+    private final PrintStream standardOut = System.out;
+    private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+
+
+    @BeforeEach
+    public void setUp() {
+        System.setOut(new PrintStream(outputStreamCaptor));
     }
+
+    @Test
+    @DisplayName("Integration Test")
+    void runTest(){
+        //Arrange
+        List<String> arguments= new ArrayList<>(List.of("INPUT-FILE=temp/input.txt","CINEMA-DATA=temp/cinema.csv","SCREEN-DATA=temp/screen.csv","SEAT-DATA=temp/seat.csv","CUSTOMER-DATA=temp/customer.csv","MOVIE-DATA=temp/movie.csv","SHOW-DATA=temp/show.csv"));
+        String expectedOutput = "Movie Id - 1\n" +
+                "Movie Name - MovieA\n" +
+                "Movie Duration - 120\n" +
+                "\n" +
+                "Movie Id - 2\n" +
+                "Movie Name - MovieB\n" +
+                "Movie Duration - 120\n" +
+                "\n" +
+                "Movie Id - 3\n" +
+                "Movie Name - MovieC\n" +
+                "Movie Duration - 120\n" +
+                "\n" +
+                "Show Id - 1\n" +
+                "Movie Title - MovieA\n" +
+                "Start Time - 14/10/2020 10:30\n" +
+                "End Time - 14/10/2020 13:00\n" +
+                "Cinema Name - CinemaA\n" +
+                "Screen Name - SCREENA\n" +
+                "\n" +
+                "Show Id - 4\n" +
+                "Movie Title - MovieA\n" +
+                "Start Time - 14/10/2020 10:30\n" +
+                "End Time - 14/10/2020 13:00\n" +
+                "Cinema Name - CinemaB\n" +
+                "Screen Name - SCREENA\n" + 
+                "\n" +
+                "Show Id - 7\n" +
+                "Movie Title - MovieA\n" +
+                "Start Time - 14/10/2020 10:30\n" +
+                "End Time - 14/10/2020 13:00\n" +
+                "Cinema Name - CinemaC\n" +
+                "Screen Name - SCREENA\n" +
+                "\n" +
+                "SeatRow - 4\n" +
+                "SeatColumn - 6\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 4\n" +
+                "SeatColumn - 3\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 4\n" +
+                "SeatColumn - 2\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 4\n" +
+                "SeatColumn - 5\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 4\n" +
+                "SeatColumn - 4\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 4\n" +
+                "SeatColumn - 1\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 5\n" +
+                "SeatColumn - 6\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 5\n" +
+                "SeatColumn - 5\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 5\n" +
+                "SeatColumn - 2\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 5\n" +
+                "SeatColumn - 1\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 5\n" +
+                "SeatColumn - 4\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 5\n" +
+                "SeatColumn - 3\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 6\n" +
+                "SeatColumn - 5\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 6\n" +
+                "SeatColumn - 4\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 6\n" +
+                "SeatColumn - 6\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 6\n" +
+                "SeatColumn - 1\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 6\n" +
+                "SeatColumn - 3\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 6\n" +
+                "SeatColumn - 2\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 1\n" +
+                "SeatColumn - 6\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 1\n" +
+                "SeatColumn - 5\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 1\n" +
+                "SeatColumn - 2\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 1\n" +
+                "SeatColumn - 1\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 1\n" +
+                "SeatColumn - 4\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 1\n" +
+                "SeatColumn - 3\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 2\n" +
+                "SeatColumn - 5\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 2\n" +
+                "SeatColumn - 4\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 2\n" +
+                "SeatColumn - 6\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 2\n" +
+                "SeatColumn - 1\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 2\n" +
+                "SeatColumn - 3\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 2\n" +
+                "SeatColumn - 2\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 3\n" +
+                "SeatColumn - 4\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 3\n" +
+                "SeatColumn - 3\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 3\n" +
+                "SeatColumn - 6\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 3\n" +
+                "SeatColumn - 5\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 3\n" +
+                "SeatColumn - 2\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 3\n" +
+                "SeatColumn - 1\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "TicketId - 1\n" +
+                "\n" +
+                "SeatRow - 4\n" +
+                "SeatColumn - 6\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 4\n" +
+                "SeatColumn - 3\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 4\n" +
+                "SeatColumn - 2\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 4\n" +
+                "SeatColumn - 5\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 4\n" +
+                "SeatColumn - 4\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 4\n" +
+                "SeatColumn - 1\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 5\n" +
+                "SeatColumn - 6\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 5\n" +
+                "SeatColumn - 5\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 5\n" +
+                "SeatColumn - 2\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 5\n" +
+                "SeatColumn - 1\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 5\n" +
+                "SeatColumn - 4\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 5\n" +
+                "SeatColumn - 3\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 6\n" +
+                "SeatColumn - 5\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 6\n" +
+                "SeatColumn - 4\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 6\n" +
+                "SeatColumn - 6\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 6\n" +
+                "SeatColumn - 1\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 6\n" +
+                "SeatColumn - 3\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 6\n" +
+                "SeatColumn - 2\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 1\n" +
+                "SeatColumn - 6\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 1\n" +
+                "SeatColumn - 5\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 1\n" +
+                "SeatColumn - 2\n" +
+                "Status - RESERVED\n" +
+                "\n" +
+                "SeatRow - 1\n" +
+                "SeatColumn - 1\n" +
+                "Status - RESERVED\n" +
+                "\n" +
+                "SeatRow - 1\n" +
+                "SeatColumn - 4\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 1\n" +
+                "SeatColumn - 3\n" +
+                "Status - RESERVED\n" +
+                "\n" +
+                "SeatRow - 2\n" +
+                "SeatColumn - 5\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 2\n" +
+                "SeatColumn - 4\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 2\n" +
+                "SeatColumn - 6\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 2\n" +
+                "SeatColumn - 1\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 2\n" +
+                "SeatColumn - 3\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 2\n" +
+                "SeatColumn - 2\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 3\n" +
+                "SeatColumn - 4\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 3\n" +
+                "SeatColumn - 3\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 3\n" +
+                "SeatColumn - 6\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 3\n" +
+                "SeatColumn - 5\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 3\n" +
+                "SeatColumn - 2\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 3\n" +
+                "SeatColumn - 1\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "Ticket has been cancelled\n" +
+                "\n" +
+                "SeatRow - 4\n" +
+                "SeatColumn - 6\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 4\n" +
+                "SeatColumn - 3\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 4\n" +
+                "SeatColumn - 2\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 4\n" +
+                "SeatColumn - 5\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 4\n" +
+                "SeatColumn - 4\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 4\n" +
+                "SeatColumn - 1\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 5\n" +
+                "SeatColumn - 6\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 5\n" +
+                "SeatColumn - 5\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 5\n" +
+                "SeatColumn - 2\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 5\n" +
+                "SeatColumn - 1\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 5\n" +
+                "SeatColumn - 4\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 5\n" +
+                "SeatColumn - 3\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 6\n" +
+                "SeatColumn - 5\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 6\n" +
+                "SeatColumn - 4\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 6\n" +
+                "SeatColumn - 6\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 6\n" +
+                "SeatColumn - 1\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 6\n" +
+                "SeatColumn - 3\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 6\n" +
+                "SeatColumn - 2\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 1\n" +
+                "SeatColumn - 6\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 1\n" +
+                "SeatColumn - 5\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 1\n" +
+                "SeatColumn - 2\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 1\n" +
+                "SeatColumn - 1\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 1\n" +
+                "SeatColumn - 4\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 1\n" +
+                "SeatColumn - 3\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 2\n" +
+                "SeatColumn - 5\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 2\n" +
+                "SeatColumn - 4\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 2\n" +
+                "SeatColumn - 6\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 2\n" +
+                "SeatColumn - 1\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 2\n" +
+                "SeatColumn - 3\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 2\n" +
+                "SeatColumn - 2\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 3\n" +
+                "SeatColumn - 4\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 3\n" +
+                "SeatColumn - 3\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 3\n" +
+                "SeatColumn - 6\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 3\n" +
+                "SeatColumn - 5\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 3\n" +
+                "SeatColumn - 2\n" +
+                "Status - UNRESERVED\n" +
+                "\n" +
+                "SeatRow - 3\n" +
+                "SeatColumn - 1\n" +
+                "Status - UNRESERVED";
+        //Act
+        App.run(arguments);
+
+        //Assert
+        Assertions.assertEquals(expectedOutput,outputStreamCaptor.toString().trim());
+    }
+
+    @AfterEach
+    public void tearDown() {
+        System.setOut(standardOut);
+    }
+
 }
